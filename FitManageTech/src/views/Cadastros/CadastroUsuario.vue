@@ -1,85 +1,63 @@
 <template>
-     <form @submit.prevent="handleCreateAccount" class="form-login">
+     <main >
+       <h1>Formulário de cadastro</h1>
+     <Form @submit="handleSubmit" :validation-schema="usuarioSchema"  v-slot="{ errors }" class="form-login" >
           <div class="logo">Fit Manage Tech
         <span class="mdi mdi-weight-lifter" ></span>
         <h3>Criar conta</h3>
       </div>
-       
-     
-      
+         <Field type="text" name="name" v-model="usuario.name" placeholder="Digite o nome" />
+         {{ errors.name }}
    
-       <div class="form-element">
-         <label for="name"> Nome completo </label>
-         <input class="form-input " id="name" v-model="name"  />
-        
-       </div>
-   
-       <div class="form-element">
-         <label for="email"> Email </label>
-         <input class="form-input" id="email" v-model="email" />
-        
-       </div>
-   
-       <div class="form-element">
-         <label for="phone"> Telefone </label>
-         <input class="form-input" id="phone" v-model="phone" />
-        
-       </div>
-   
-       <div class="form-element">
-         <label for="password"> Senha </label>
-         <input class="form-input" id="password" type="password"  />
+         <Field type="email" name="email" v-model="usuario.email" placeholder="Digite o email" />
+         {{ errors.email }}
+
+         <Field type="password" name="password" v-model="usuario.password" placeholder="Escolha uma senha" />
+         {{ errors.password }}
+
          
-       </div>
-   
-       <div class="form-element">
-         <label for="verifyPassword"> Confirma senha </label>
-         <input class="form-input" id="verifyPassword" type="password"  />
-        
-       </div>
-   
-      
-        <label for="">Selecione um Plano</label>
-       <select >
-          <option value="Bonze">Bronze</option>
-          <option value="Prata">Prata</option>
-          <option value="Bonze">Ouro</option>
-       </select>
-         
-   
-         
-   
-   
-       <button type="submit">Criar conta</button>
-     </form>
+         <button type="submit">Cadastrar</button>
+       </Form>
+     </main>
    </template>
-       
-   <script>
-   import * as yup from 'yup'
-   import axios from 'axios'
    
+   
+   <script>
+   import { Form, Field } from "vee-validate"
+   import * as Yup from "yup"
    export default {
+     components: {
+       Form,
+       Field
+     },
      data() {
        return {
-         name: '',
-         email: '',
-         phone: '',
-         password: '',
-         verifyPassword: '',
-         sponsor: '',
-         bio: '',
-         confirmTerms: true,
-         planType: '2',
-   
-         errors: {}
+         usuarioSchema: Yup.object().shape({
+           name: Yup.string().required("O nome é obrigatório!"),
+           email: Yup.string().email('Email não é valido').required('Email é obrigatório'),
+           password: Yup.string()
+            .min(8, 'A senha deve ser maior')
+            .max(20, 'Deve ter entre 8-20 letras')
+            .required('A senha é obrigatória'),
+         }),
+         usuario: {
+           name: "",
+           email: "",
+           password:""
+         }
        }
      },
-    
+     methods: {
+       handleSubmit() {
+         alert("Cadastro realizado!")
+       }
+     },
    }
    </script>
-       
-   <style scoped>
-   .form-login {
+
+   <style>
+
+.form-login {
      margin: 40px auto;
      width: 40%;
    
@@ -121,8 +99,4 @@
      border: none;
    }
    
-   button:hover {
-     background-color: #286ee0;
-   }
-   
-   </style>
+</style>
