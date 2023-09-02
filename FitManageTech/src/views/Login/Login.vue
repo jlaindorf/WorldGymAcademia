@@ -8,7 +8,10 @@
         max-width="448"
         rounded="lg"
       >
-      <div class="logo">Fit Manage Tech</div>
+      <div class="logo">Fit Manage Tech
+        <span class="mdi mdi-weight-lifter" ></span>
+      </div>
+      
         <div class="text-subtitle-1 text-medium-emphasis">Email</div>
   
         <v-text-field
@@ -122,7 +125,7 @@
   <style>
         .logo {
             font-family: Arial, sans-serif;
-            font-size: 24px;
+            font-size: 20px;
             font-weight: bold;
             color: #3498db; /* Cor azul */
             text-transform: uppercase;
@@ -131,4 +134,8 @@
             width: 80%;
            
         }
+        .mdi {
+          width: 30%;
+        }
+        
     </style>
