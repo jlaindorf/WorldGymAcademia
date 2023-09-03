@@ -1,5 +1,5 @@
 <template>
-    
+  
 
     <v-form ref="form" @submit.prevent="handleSubmit">
       <v-card
@@ -97,7 +97,7 @@
         const result = await axios.post('http://localhost:3000/sessions', this.usuario)
 
         if(result.status == 200){
-          debugger
+          
           localStorage.setItem("user-info", JSON.stringify(result.data))
           this.$router.push('/dashboard')
         }
@@ -107,6 +107,7 @@
       } catch (error) {
         console.log(error.response.data.error)
         alert("Usuário não cadastrado!")
+       
 
       }
 
