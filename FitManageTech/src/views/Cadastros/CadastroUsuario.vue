@@ -1,102 +1,168 @@
 <template>
-     <main >
-       <h1>Formulário de cadastro</h1>
-     <Form @submit="handleSubmit" :validation-schema="usuarioSchema"  v-slot="{ errors }" class="form-login" >
-          <div class="logo">Fit Manage Tech
-        <span class="mdi mdi-weight-lifter" ></span>
-        <h3>Criar conta</h3>
-      </div>
-         <Field type="text" name="name" v-model="usuario.name" placeholder="Digite o nome" />
-         {{ errors.name }}
-   
-         <Field type="email" name="email" v-model="usuario.email" placeholder="Digite o email" />
-         {{ errors.email }}
+    
 
-         <Field type="password" name="password" v-model="usuario.password" placeholder="Escolha uma senha" />
-         {{ errors.password }}
-
+     <v-form ref="form" @submit.prevent="handleSubmit">
+       <v-card
+         class="mx-auto pa-12 pb-8"
+         elevation="8"
+         max-width="448"
+         rounded="lg"
+       >
+       <div class="logo">Fit Manage Tech
+         <span class="mdi mdi-weight-lifter" ></span>
+         <h3>Cadastro de Usuário</h3>
+       </div>
+       <div class="text-subtitle-1 text-medium-emphasis">Nome Completo</div>
+       <v-text-field
+           v-model="usuario.nome"
+           density="compact"
+           placeholder="Digite seu nome Completo"
+           prepend-inner-icon="mdi-note-edit-outline"
+           variant="outlined"
+           :rules="[value => !!value || 'O email é obrigatório!']"
+         ></v-text-field>
+       
+         <div class="text-subtitle-1 text-medium-emphasis">Email</div>   
+         <v-text-field
+           v-model="usuario.email"
+           density="compact"
+           placeholder="Digite seu Email "
+           prepend-inner-icon="mdi-email-outline"
+           variant="outlined"
+           :rules="[value => !!value || 'O email é obrigatório!']"
+         ></v-text-field>
          
-         <button type="submit">Cadastrar</button>
-       </Form>
-     </main>
+       
+         <div class="text-subtitle-1 text-medium-emphasis d-flex align-center justify-space-between">
+           Senha
+         </div>
+           <v-text-field
+            v-model="usuario.password"
+           type="password"
+           density="compact"
+           placeholder="Escolha sua Senha"
+           prepend-inner-icon="mdi-lock-outline"
+           variant="outlined"
+           :rules="[value => !!value || 'A senha é obrigatória!']"
+         
+         ></v-text-field>
+         
+         <div class="text-subtitle-1 text-medium-emphasis d-flex align-center justify-space-between">
+           Confirme a Senha
+         </div>
+           <v-text-field
+            v-model="usuario.verifyPassword"
+           type="password"
+           density="compact"
+           placeholder="Digite sua Senha"
+           prepend-inner-icon="mdi-lock-outline"
+           variant="outlined"
+           :rules="[value => !!value || 'A senha é obrigatória!']"
+         
+         ></v-text-field>
+         <div class="text-subtitle-1 text-medium-emphasis">Selecione seu Plano</div>
+         <v-select
+           label="Bronze"
+           :items="['Bronze', 'Prata', 'Gold']"
+           variant="outlined"
+          ></v-select>
+   
+         <v-card
+           class="mb-12"
+           color="surface-variant"
+           variant="tonal"
+         >
+          
+         </v-card>
+   
+         <v-btn
+           type="submit"
+           block
+           class="mb-8"
+           color="blue"
+           size="large"
+           variant="tonal"
+         >
+           Login
+         </v-btn>
+   
+         <v-card-text class="text-center">
+           <a
+             @click="cadastroUsuario"
+             class="text-blue text-decoration-none"
+             href="#"
+             rel="noopener noreferrer"
+             target="_blank"
+           >
+           <v-icon icon="mdi-chevron-left"></v-icon>Voltar à tela de Login 
+           </a>
+         </v-card-text>
+       </v-card>
+     </v-form>
    </template>
-   
-   
    <script>
-   import { Form, Field } from "vee-validate"
-   import * as Yup from "yup"
-   export default {
-     components: {
-       Form,
-       Field
-     },
-     data() {
-       return {
-         usuarioSchema: Yup.object().shape({
-           name: Yup.string().required("O nome é obrigatório!"),
-           email: Yup.string().email('Email não é valido').required('Email é obrigatório'),
-           password: Yup.string()
-            .min(8, 'A senha deve ser maior')
-            .max(20, 'Deve ter entre 8-20 letras')
-            .required('A senha é obrigatória'),
-         }),
-         usuario: {
-           name: "",
-           email: "",
-           password:""
+     import axios from 'axios'
+     export default {
+   data() {
+     return {
+       usuario: {
+         email: "",
+         password: ""
+       },
+     }
+   },
+   methods: {
+     async handleSubmit(){
+       const {valid} = await this.$refs.form.validate()
+ 
+       if(!valid){
+         alert("Preencha todos os dados!")
+         return
+       }
+ 
+       try {
+         const result = await axios.post('http://localhost:3000/sessions', this.usuario)
+ 
+         if(result.status == 200){
+           debugger
+           localStorage.setItem("user-info", JSON.stringify(result.data))
+           this.$router.push('/dashboard')
          }
+         
+         console.log(result)
+ 
+       } catch (error) {
+         console.log(error.response.data.error)
+         alert("Usuário não cadastrado!")
+ 
        }
+ 
+       
      },
-     methods: {
-       handleSubmit() {
-         alert("Cadastro realizado!")
-       }
-     },
+     cadastroUsuario(){
+         this.$router.push('/cadastro-novo')
+ 
+ 
+     }
    }
-   </script>
-
+ }
+ </script>
+ 
+ 
    <style>
-
-.form-login {
-     margin: 40px auto;
-     width: 40%;
-   
-     border-radius: 4px;
-     border: 1px solid #383737;
-   
-     display: flex;
-     flex-direction: column;
-     gap: 10px;
-     align-items: center;
-   
-     padding: 10px;
-   }
-   
-   .form-element {
-     display: flex;
-     flex-direction: column;
-     width: 80%;
-     justify-content: center;
-     align-items: center;
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: white;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      border-radius: 8px;
-      max-width: 448px;
-   }
-   
-   
-   
-   button {
-     width: 80%;
-     height: 54px;
-     background-color: #3578e5;
-   
-     color: white;
-     font-size: 18px;
-     border-radius: 8px;
-     border: none;
-   }
-   
-</style>
+         .logo {
+             font-family: Arial, sans-serif;
+             font-size: 20px;
+             font-weight: bold;
+             color: #3498db; /* Cor azul */
+             text-transform: uppercase;
+             letter-spacing: 4px;
+             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+             width: 80%;
+            
+         }
+         .mdi {
+           width: 30%;
+         }
+         
+     </style>
