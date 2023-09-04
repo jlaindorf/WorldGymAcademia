@@ -97,7 +97,7 @@
         const result = await axios.post('http://localhost:3000/sessions', this.usuario)
 
         if(result.status == 200){
-          
+          alert('Cadastro Realizado!')
           localStorage.setItem("user-info", JSON.stringify(result.data))
           this.$router.push('/dashboard')
         }
