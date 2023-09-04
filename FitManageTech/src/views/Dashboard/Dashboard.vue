@@ -5,14 +5,27 @@
   <v-card
     class="mx-auto"
     width="400"
-    prepend-icon="mdi-account"
+    prepend-icon="mdi-account-multiple"
   >
     <template v-slot:title>
-      This is a title
+      Alunos
     </template>
 
     <v-card-text>
-      This is content
+      <h1></h1>
+    </v-card-text>
+  </v-card>
+  <v-card
+    class="mx-auto"
+    width="400"
+    prepend-icon="mdi-arm=flex"
+  >
+    <template v-slot:title>
+      Exercícios
+    </template>
+
+    <v-card-text>
+      10
     </v-card-text>
   </v-card>
 </main>
@@ -23,15 +36,24 @@
 export default {
   data() {
     const dadosUsuario = localStorage.getItem('user-info');
-    const valorChave = JSON.parse(dadosUsuario); 
+    const nome = JSON.parse(dadosUsuario); 
 
     return {
       dadosUsuario: dadosUsuario,
-      valorChave: valorChave,
-      nome: valorChave.name, 
+      
+      nome: nome, 
     };
   },
 };
 </script>
 
 
+<style scoped>
+
+main{
+  display: flex;
+  flex-direction: row;
+  align-content: space-between;
+}
+
+</style>
