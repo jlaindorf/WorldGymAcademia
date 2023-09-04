@@ -1,5 +1,5 @@
 <template>
-    
+  
 
     <v-form ref="form" @submit.prevent="handleSubmit">
       <v-card
@@ -8,7 +8,10 @@
         max-width="448"
         rounded="lg"
       >
-      <div class="logo">Fit Manage Tech</div>
+      <div class="logo">Fit Manage Tech
+        <span class="mdi mdi-weight-lifter" ></span>
+      </div>
+      
         <div class="text-subtitle-1 text-medium-emphasis">Email</div>
   
         <v-text-field
@@ -94,7 +97,7 @@
         const result = await axios.post('http://localhost:3000/sessions', this.usuario)
 
         if(result.status == 200){
-          debugger
+          alert('Cadastro Realizado!')
           localStorage.setItem("user-info", JSON.stringify(result.data))
           this.$router.push('/dashboard')
         }
@@ -104,6 +107,7 @@
       } catch (error) {
         console.log(error.response.data.error)
         alert("Usuário não cadastrado!")
+       
 
       }
 
@@ -122,7 +126,7 @@
   <style>
         .logo {
             font-family: Arial, sans-serif;
-            font-size: 24px;
+            font-size: 20px;
             font-weight: bold;
             color: #3498db; /* Cor azul */
             text-transform: uppercase;
@@ -131,4 +135,8 @@
             width: 80%;
            
         }
+        .mdi {
+          width: 30%;
+        }
+        
     </style>
