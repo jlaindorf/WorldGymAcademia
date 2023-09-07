@@ -64,10 +64,10 @@ export default {
       })
         .then((response) => {
             this.listaExercicios = response.data
-          console.log(this.listaExercicios)})
+        })
          
         .catch(() => {
-          alert('deu ruim')
+          alert('Não foi possível Acessar a Lista de Exercícios')
         })
     },
    
@@ -81,7 +81,7 @@ export default {
     description: this.exercicio
   }
 }).then((response) => {
-  console.log(this.exercicio);
+  alert('Exercício cadastrado com sucesso!')
 }).catch((error) => {
   console.error(error);
 });}
