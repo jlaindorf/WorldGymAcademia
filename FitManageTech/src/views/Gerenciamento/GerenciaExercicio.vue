@@ -6,7 +6,7 @@
       <h1>Gerenciamento de Exercícios</h1>
     </div>
 
-    <v-form ref="form" @submit.prevent="getExercise">
+    <v-form ref="form" @submit="getExercise">
         <v-row align="center" justify="center">
     <v-col cols="6"> 
         <v-text-field label="Exercício" prepend-icon="mdi-arm-flex"
