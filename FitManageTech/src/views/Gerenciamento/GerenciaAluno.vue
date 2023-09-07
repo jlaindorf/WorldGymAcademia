@@ -8,7 +8,7 @@
         <h1>Alunos</h1>
      </v-col>
       <v-col cols="2"> 
-      <v-btn type="submit" color="blue" prepend-icon="mdi-plus" variant="tonal">Novo</v-btn>
+      <v-btn type="submit" color="blue" @click="cadastrarNovo" prepend-icon="mdi-plus" variant="tonal">Novo</v-btn>
     </v-col>
     </v-row>
     </div>
@@ -16,11 +16,14 @@
     <v-form ref="form">
         <v-row align="center" justify="center">
     <v-col cols="6"> 
-        <v-text-field label="Aluno" prepend-icon="mdi-account-search"
-         v-model="aluno"  :rules="[value => !!value || 'É obrigatório colocar o Nome']" ></v-text-field>
+        <v-text-field label="Nome do Aluno" prepend-icon="mdi-account-search"
+     v-model="aluno"  :rules="[value => !!value || 'É obrigatório colocar o Nome']"
+></v-text-field>
+
     </v-col>
     <v-col cols="2"> 
-      <v-btn type="submit"  @click="searchStudent" color="blue" variant="tonal">Buscar</v-btn>
+        <v-btn type="submit" @click="searchStudent" color="blue" variant="tonal">Buscar</v-btn>
+
     </v-col>
   </v-row>
 
@@ -33,8 +36,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="aluno in listaAlunos" :key="aluno.description">
-        <td>{{ exercicio.description }}</td>
+      <tr v-for="aluno in listaAlunos" :key="aluno.id">
+        <td>{{ aluno.id}}</td>
       </tr>
     </tbody>
   </v-table>
@@ -57,13 +60,22 @@ export default {
      
     };
   },
+  mounted() {
+    this.loadStudents()
+  },
+
   
   methods: {
-    
-    searchStudent() {
+    cadastrarNovo(){
 
-      axios({
-        url: 'http://localhost:3000',
+        this.$router.push('/cadastro-aluno')
+    }
+    
+    ,
+    loadStudents() {
+ 
+        axios({
+        url: 'http://localhost:3000/students',
         method: 'GET',
       })
         .then((response) => {
@@ -71,10 +83,11 @@ export default {
         })
          
         .catch(() => {
-          alert('Não foi possível Localizar Aluno')
+          alert('Não foi possível localizar Alunos')
         })
     },
    
+
 }}
 </script>
 
