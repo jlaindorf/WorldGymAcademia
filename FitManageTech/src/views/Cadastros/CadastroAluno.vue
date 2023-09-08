@@ -1,5 +1,5 @@
 <template>
-   <v-form ref="form" @click="cadastraAluno">
+   <v-form ref="form" @submit="cadastraAluno" >
       <div class="logo">Fit Manage Tech
         <span class="mdi mdi-weight-lifter"></span>
        <h4 class="mdi mdi-account-multiple">Cadastro de Aluno</h4>
@@ -165,7 +165,7 @@ export default {
       email: '',
       emailRules: [ 
         v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail tem que ser válido'],
-      dataSelecionada: null,
+      dataSelecionada: '',
      
     }
   },
@@ -181,11 +181,44 @@ export default {
           this.bairro = this.data.bairro;
           this.cidade = this.data.localidade;
           this.uf = this.data.uf;
+
+         
         })
         .catch(() => {
           alert('Não foi possível Encontrar o endereço');
         });
     },
+    cadastraAluno(){
+   axios({
+      url:'http://localhost:3000/students',
+      method: 'POST',
+      data: {
+            name: this.nome,
+            email: this.email,
+            contact: this.contato,
+            date_birth: this.dataSelecionada,
+            cep: this.cep,
+            street: this.logradouro,
+            number: this.numero,
+            neighborhood : this.bairro,
+            city: this.cidade,
+            province: this.uf,
+            complement: this.complemento
+         
+
+          }
+   })
+   .then(( response) =>{
+
+      alert('Aluno cadastrado com sucesso!')
+           
+
+   })
+   .catch(( ) => {
+           alert('Não foi possível cadastrar o ALuno ')
+          })
+  }
   },
+ 
 };
 </script>
