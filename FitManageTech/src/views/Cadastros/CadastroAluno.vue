@@ -234,7 +234,9 @@ export default {
           this.numero = '';
           this.email = '';
           this.dataSelecionada = null;
-    
+          this.$nextTick(() => {
+        this.$refs.form.resetValidation();
+      });
    })
    .catch(( ) => {
            alert('Não foi possível cadastrar o ALuno ')
