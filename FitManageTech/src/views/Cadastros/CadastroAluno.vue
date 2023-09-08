@@ -165,7 +165,7 @@ export default {
       email: '',
       emailRules: [ 
         v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail tem que ser válido'],
-      dataSelecionada: '',
+      data: 'null',
      
     }
   },
@@ -196,7 +196,7 @@ export default {
             name: this.nome,
             email: this.email,
             contact: this.contato,
-            date_birth: this.dataSelecionada,
+            date_birth: this.data,
             cep: this.cep,
             street: this.logradouro,
             number: this.numero,
@@ -211,8 +211,7 @@ export default {
    .then(( response) =>{
 
       alert('Aluno cadastrado com sucesso!')
-           
-
+    
    })
    .catch(( ) => {
            alert('Não foi possível cadastrar o ALuno ')
