@@ -143,7 +143,8 @@
          </v-col>
        </v-row>
      </v-container>
-     <v-btn :disabled="!formularioValido" @click="cadastraAluno" color="blue" variant="tonal">Cadastrar</v-btn>
+     <v-btn :disabled="!formularioValido" @click="cadastraAluno" 
+     color="blue" variant="tonal">Cadastrar</v-btn>
    </v-form>
 
  </template>
@@ -222,6 +223,17 @@ export default {
    })
    .then(( response) =>{
       alert('Aluno cadastrado com sucesso!')
+      this.nome = '';
+          this.contato = '';
+          this.cep = '';
+          this.logradouro = '';
+          this.complemento = '';
+          this.bairro = '';
+          this.cidade = '';
+          this.uf = '';
+          this.numero = '';
+          this.email = '';
+          this.dataSelecionada = null;
     
    })
    .catch(( ) => {
