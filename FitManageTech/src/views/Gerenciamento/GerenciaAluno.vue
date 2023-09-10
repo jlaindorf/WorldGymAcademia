@@ -29,16 +29,19 @@
 
 </v-form>
 
-<v-table>
+<v-table >
     <thead>
       <tr>
         <th class="text-left">Alunos Cadastrados</th>
       </tr>
     </thead>
     <tbody>
-      <tr v-for="aluno in listaAlunos" :key="aluno.id">
-        <td>{{ aluno.id}}</td>
-      </tr>
+      <tr v-for="aluno in listaAlunos" :key="aluno.name">
+  <td>{{ aluno.name }}
+  <v-btn color="blue" variant="tonal">Montar treino</v-btn>
+  <v-btn color="blue" variant="tonal">Ver</v-btn></td>
+</tr>
+     
     </tbody>
   </v-table>
 
@@ -65,27 +68,28 @@ export default {
   },
 
   
-  methods: {
+  methods:{
+    loadStudents() {
+ 
+ axios({
+ url: 'http://localhost:3000/students',
+ method: 'GET',
+})
+ .then((response) => {
+     this.listaAlunos = response.data.students
+ })
+  
+ .catch(() => {
+   alert('Não foi possível localizar Alunos')
+ })
+},
     cadastrarNovo(){
 
         this.$router.push('/cadastro-aluno')
     }
     
     ,
-    loadStudents() {
- 
-        axios({
-        url: 'http://localhost:3000/students',
-        method: 'GET',
-      })
-        .then((response) => {
-            this.listaAlunos = response.data
-        })
-         
-        .catch(() => {
-          alert('Não foi possível localizar Alunos')
-        })
-    },
+    
    
 
 }}
