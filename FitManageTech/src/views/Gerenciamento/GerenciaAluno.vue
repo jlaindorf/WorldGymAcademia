@@ -8,7 +8,7 @@
         <h1>Alunos</h1>
      </v-col>
       <v-col cols="2"> 
-      <v-btn type="submit" color="blue" @click="cadastrarNovo" prepend-icon="mdi-plus" variant="tonal">Novo</v-btn>
+      <v-btn type="submit" color="blue" @click="newStudent" prepend-icon="mdi-plus" variant="tonal">Novo</v-btn>
     </v-col>
     </v-row>
     </div>
@@ -38,8 +38,8 @@
     <tbody>
       <tr v-for="aluno in listaAlunos" :key="aluno.name">
   <td>{{ aluno.name }}
-  <v-btn color="blue" variant="tonal">Montar treino</v-btn>
-  <v-btn color="blue" variant="tonal">Ver</v-btn></td>
+  <v-btn @click.prevent="setUpTtrainning" color="blue" variant="tonal">Montar treino</v-btn>
+  <v-btn  @click.prevent="seeTrainning" color="blue" variant="tonal">Ver</v-btn></td>
 </tr>
      
     </tbody>
@@ -83,13 +83,24 @@ export default {
    alert('Não foi possível localizar Alunos')
  })
 },
-    cadastrarNovo(){
+    newStudent(){
 
         this.$router.push('/cadastro-aluno')
     }
     
     ,
-    
+    setUpTtrainning(){
+
+this.$router.push('/cadastro-treino')
+}
+
+,
+seeTrainning(){
+
+this.$router.push('/visualizacao-treinos')
+}
+
+,
     
         searchStudent(){
           const buscaAluno = this.aluno
