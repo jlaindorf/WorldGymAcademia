@@ -8,7 +8,7 @@
         <h1>Alunos</h1>
      </v-col>
       <v-col cols="2"> 
-      <v-btn type="submit" color="blue" @click="cadastrarNovo" prepend-icon="mdi-plus" variant="tonal">Novo</v-btn>
+      <v-btn type="submit" color="blue" @click="newStudent" prepend-icon="mdi-plus" variant="tonal">Novo</v-btn>
     </v-col>
     </v-row>
     </div>
@@ -22,23 +22,26 @@
 
     </v-col>
     <v-col cols="2"> 
-        <v-btn type="submit" @click="searchStudent" color="blue" variant="tonal">Buscar</v-btn>
+        <v-btn type="submit" @click.prevent="searchStudent" color="blue" variant="tonal">Buscar</v-btn>
 
     </v-col>
   </v-row>
 
 </v-form>
 
-<v-table>
+<v-table >
     <thead>
       <tr>
         <th class="text-left">Alunos Cadastrados</th>
       </tr>
     </thead>
     <tbody>
-      <tr v-for="aluno in listaAlunos" :key="aluno.id">
-        <td>{{ aluno.id}}</td>
-      </tr>
+      <tr v-for="aluno in listaAlunos" :key="aluno.name">
+  <td>{{ aluno.name }}
+  <v-btn @click.prevent="setUpTtrainning" color="blue" variant="tonal">Montar treino</v-btn>
+  <v-btn  @click.prevent="seeTrainning" color="blue" variant="tonal">Ver</v-btn></td>
+</tr>
+     
     </tbody>
   </v-table>
 
@@ -65,27 +68,45 @@ export default {
   },
 
   
-  methods: {
-    cadastrarNovo(){
+  methods:{
+    loadStudents() {
+ 
+ axios({
+ url: 'http://localhost:3000/students',
+ method: 'GET',
+})
+ .then((response) => {
+     this.listaAlunos = response.data.students
+ })
+  
+ .catch(() => {
+   alert('Não foi possível localizar Alunos')
+ })
+},
+    newStudent(){
 
         this.$router.push('/cadastro-aluno')
     }
     
     ,
-    loadStudents() {
- 
-        axios({
-        url: 'http://localhost:3000/students',
-        method: 'GET',
-      })
-        .then((response) => {
-            this.listaAlunos = response.data
-        })
-         
-        .catch(() => {
-          alert('Não foi possível localizar Alunos')
-        })
-    },
+    setUpTtrainning(){
+
+this.$router.push('/cadastro-treino')
+}
+
+,
+seeTrainning(){
+
+this.$router.push('/visualizacao-treinos')
+}
+
+,
+    
+        searchStudent(){
+          const buscaAluno = this.aluno
+          this.listaAlunos = this.listaAlunos.filter(item => item.name.includes(buscaAluno))
+        }
+    
    
 
 }}

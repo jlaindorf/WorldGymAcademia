@@ -10,7 +10,7 @@
         <v-row align="center" justify="center">
     <v-col cols="6"> 
         <v-text-field label="Exercício" prepend-icon="mdi-arm-flex"
-         v-model="exercicio"  :rules="[value => !!value || 'É obrigatório colocar o exercício']" ></v-text-field>
+         v-model="exercicio" :rules="[value => !!value || 'É obrigatório colocar o exercício']"  ></v-text-field>
     </v-col>
     <v-col cols="2"> 
       <v-btn type="submit" color="blue" variant="tonal">Cadastrar</v-btn>
