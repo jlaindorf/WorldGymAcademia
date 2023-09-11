@@ -22,7 +22,7 @@
 
     </v-col>
     <v-col cols="2"> 
-        <v-btn type="submit" @click="searchStudent" color="blue" variant="tonal">Buscar</v-btn>
+        <v-btn type="submit" @click.prevent="searchStudent" color="blue" variant="tonal">Buscar</v-btn>
 
     </v-col>
   </v-row>
@@ -89,6 +89,12 @@ export default {
     }
     
     ,
+    
+    
+        searchStudent(){
+          const buscaAluno = this.aluno
+          this.listaAlunos = this.listaAlunos.filter(item => item.name.includes(buscaAluno))
+        }
     
    
 
