@@ -31,7 +31,7 @@
               label="Repetições"
                 v-model="reps"
               variant="outlined"
-              :rules="[value => !!value || 'Dado obrigatório']" 
+              :rules="[value => !!value || 'No minímo uma repetição']" 
             ></v-text-field>
           </v-col>
  
@@ -40,7 +40,8 @@
             sm="4"
           >
           <v-text-field
-              label="Quilos"
+              label="Peso em Quilos"
+              type="number"
               v-model="kilos"
               :rules="[value => !!value || 'Dado obrigatório']" 
               variant="outlined"
@@ -53,6 +54,7 @@
           >
           <v-text-field
               label="Pausa em segundos"
+              type="number"
               v-model="rest"
               :rules="[value => !!value || 'Dado obrigatório']" 
               variant="outlined"
@@ -113,6 +115,10 @@
    },
    mounted() {
     this.loadExercises()
+    const diasDaSemana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+    const dataAtual = new Date();
+    this.weekDays = diasDaSemana[dataAtual.getDay()];
+  
     
   },
 
