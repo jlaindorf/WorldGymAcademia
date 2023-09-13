@@ -75,7 +75,7 @@
           <v-textarea
              autocomplete="Observações"
               label="Observações"
-              v-model="observartion"
+              v-model="observation"
               :rules="[value => !!value || 'Dado obrigatório']" >
             ></v-textarea>
           <v-col
@@ -115,9 +115,9 @@
        kilos:'',
        rest:'',
        weekDays:'',
-       observartion:'',
-       studentId: this.$route.params.id 
-       
+       observation:'',
+       studentId: this.$route.params.id ,
+       exerciseId:''
 
 
    
@@ -144,7 +144,8 @@
       })
         .then((response) => {
             this.exercises = response.data
-
+            console.log(this.exercises.description)
+            
         })
          
         .catch(() => {
@@ -159,17 +160,17 @@
         return
       }
       else{
-
+        this.exerciseId = this.selectedExercise
         axios({
             url: 'http://localhost:3000/workouts',
             method: 'POST',
             data:{
                 student_id: this.studentId,
-                exercise_id: this.exercises.id,
+                exercise_id: this.exerciseId,
                 repetitions: this.reps,
                 weight : this.kilos,
                 break_time: this.rest,
-                observations : this.observartion,
+                observations : this.observation,
                 day: this.weekDays
 
             }
