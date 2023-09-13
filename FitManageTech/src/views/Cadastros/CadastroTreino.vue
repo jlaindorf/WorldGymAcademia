@@ -1,5 +1,5 @@
 <template>
-    <v-form ref="form"  >
+    <v-form ref="form" @submit.prevent="registerWorkout" >
        <div class="logo">Fit Manage Tech
          <span class="mdi mdi-weight-lifter"></span>
         <h4 class="mdi mdi-account-multiple">Cadastro de Treino</h4>
@@ -12,7 +12,14 @@
             cols="12"
             sm="12"
           >
-          <v-select  label="Qual Exercício" :items="['']" variant="outlined">
+          <v-select label="Qual Exercício" 
+          :rules="[value => !!value || 'Dado obrigatório']" 
+          v-model="selectedExercise"
+           :items="exercises" 
+           item-title="description"
+           item-value="id"
+           variant="outlined">
+          
           </v-select>
           </v-col>
          
@@ -22,7 +29,9 @@
           >
           <v-text-field
               label="Repetições"
+                v-model="reps"
               variant="outlined"
+              :rules="[value => !!value || 'Dado obrigatório']" 
             ></v-text-field>
           </v-col>
  
@@ -32,7 +41,8 @@
           >
           <v-text-field
               label="Quilos"
-            
+              v-model="kilos"
+              :rules="[value => !!value || 'Dado obrigatório']" 
               variant="outlined"
             ></v-text-field>
           </v-col>
@@ -43,6 +53,7 @@
           >
           <v-text-field
               label="Pausa em segundos"
+              v-model="rest"
               :rules="[value => !!value || 'Dado obrigatório']" 
               variant="outlined"
             ></v-text-field>
@@ -51,12 +62,17 @@
             cols="12"
             sm="12"
           >
-          <v-select  label="Dia da Semana" :items="['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta']" variant="outlined">
+          <v-select  label="Dia da Semana" :items="['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta']"
+          v-model="weekDays"
+           variant="outlined"
+           :rules="[value => !!value || 'Dado obrigatório']" >
+        
           </v-select>
           </v-col>
           <v-textarea
              autocomplete="Observações"
               label="Observações"
+              v-model="observartion"
             ></v-textarea>
           <v-col
             cols="12"
@@ -79,14 +95,36 @@
  export default {
    data() {
      return {
-       
+       exercises:[],
+       selectedExercise:'',
+
+   
       
      }
    },
+   mounted() {
+    this.loadExercises()
+  },
+
+  methods:{
+    
+    loadExercises() {
+
+      axios({
+        url: 'http://localhost:3000/exercises',
+        method: 'GET',
+      })
+        .then((response) => {
+            this.exercises = response.data
+
+        })
+         
+        .catch(() => {
+          alert('Não foi possível Acessar a Lista de Exercícios')
+        })
+    },
      
- 
-   methods: {
-   }}
+}}
  </script>
  
  <style>
