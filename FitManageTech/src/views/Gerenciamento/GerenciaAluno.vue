@@ -38,8 +38,8 @@
     <tbody>
       <tr v-for="aluno in listaAlunos" :key="aluno.name">
   <td>{{ aluno.name }}
-  <v-btn @click.prevent="setUpTtrainning" color="blue" variant="tonal">Montar treino</v-btn>
-  <v-btn  @click.prevent="seeTrainning" color="blue" variant="tonal">Ver</v-btn></td>
+  <v-btn @click.prevent="setUpTtrainning(aluno.id)" color="blue" variant="tonal">Montar treino</v-btn>
+  <v-btn  @click.prevent="seeTrainning(aluno.id)" color="blue" variant="tonal">Ver</v-btn></td>
 </tr>
      
     </tbody>
@@ -89,15 +89,15 @@ export default {
     }
     
     ,
-    setUpTtrainning(){
+    setUpTtrainning(id){
 
-this.$router.push('/cadastro-treino')
+this.$router.push(`/cadastro-treino/${id}/cadastrar`)
 }
 
 ,
-seeTrainning(){
+seeTrainning(id){
 
-this.$router.push('/visualizacao-treinos')
+this.$router.push(`/visualizacao-treinos${id}/Ver-treino`)
 }
 
 ,

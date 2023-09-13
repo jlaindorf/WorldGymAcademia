@@ -2,7 +2,7 @@
     <v-form ref="form"  >
        <div class="logo">Fit Manage Tech
          <span class="mdi mdi-weight-lifter"></span>
-        <h4 class="mdi mdi-account-multiple">Cadastro de Treino</h4>
+        <h4 class="mdi mdi-account-multiple">Cadastro de Treino </h4>
         
          
        </div>
@@ -102,7 +102,9 @@
        kilos:'',
        rest:'',
        weekDays:'',
-       observartion:''
+       observartion:'',
+       studentId: this.$route.params.id 
+       
 
 
    
@@ -111,6 +113,7 @@
    },
    mounted() {
     this.loadExercises()
+    
   },
 
   
