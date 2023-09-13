@@ -64,7 +64,8 @@
             cols="12"
             sm="12"
           >
-          <v-select  label="Dia da Semana" :items="['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta']"
+          <v-select  label="Dia da Semana" 
+          :items="['Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira','Sábado','Domingo']"
           v-model="weekDays"
            variant="outlined"
            :rules="[value => !!value || 'Dado obrigatório']" >
@@ -98,6 +99,16 @@
  export default {
    data() {
      return {
+
+        items: {
+        segunda: 'Segunda-Feira',
+        terca: 'Terça-Feira',
+        quarta: 'Quarta-Feira',
+        quinta: 'Quinta-Feira',
+        sexta: 'Sexta-Feira',
+        sabado: 'Sábado',
+        domingo: 'Domingo'
+      },
        exercises:[],
        selectedExercise:'',
        reps:'',
@@ -115,7 +126,7 @@
    },
    mounted() {
     this.loadExercises()
-    const diasDaSemana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+    const diasDaSemana = ['Domingo', 'Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira','Sábado'];
     const dataAtual = new Date();
     this.weekDays = diasDaSemana[dataAtual.getDay()];
   
@@ -147,6 +158,37 @@
         alert("Preencha todos os dados!")
         return
       }
+      else{
+
+        axios({
+            url: 'http://localhost:3000/workouts',
+            method: 'POST',
+            data:{
+                student_id: this.studentId,
+                exercise_id: this.exercises.id,
+                repetitions: this.reps,
+                weight : this.kilos,
+                break_time: this.rest,
+                observations : this.observartion,
+                day: this.weekDays
+
+            }
+            ,
+
+        })
+        .then((response) => {
+            alert('Cadastrado com sucesso');
+            console.log(response.data);
+           
+          })
+          .catch(() => {
+            alert('não foi possível criar o treino nesse momento');
+          });
+
+      }
+
+        
+      
 
     }
   }
