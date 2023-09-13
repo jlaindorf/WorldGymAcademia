@@ -1,5 +1,5 @@
 <template>
-    <v-form ref="form" @submit.prevent="registerWorkout" >
+    <v-form ref="form"  >
        <div class="logo">Fit Manage Tech
          <span class="mdi mdi-weight-lifter"></span>
         <h4 class="mdi mdi-account-multiple">Cadastro de Treino</h4>
@@ -73,6 +73,7 @@
              autocomplete="Observações"
               label="Observações"
               v-model="observartion"
+              :rules="[value => !!value || 'Dado obrigatório']" >
             ></v-textarea>
           <v-col
             cols="12"
@@ -85,9 +86,9 @@
          
         </v-row>
       </v-container>
-      <v-btn color="blue" variant="tonal">Cadastrar</v-btn>
-    </v-form>
- 
+      <v-btn color="blue" variant="tonal" @click="registerWorkout">Cadastrar</v-btn>
+  </v-form>
+
   </template>
  
  <script>
@@ -97,6 +98,12 @@
      return {
        exercises:[],
        selectedExercise:'',
+       reps:'',
+       kilos:'',
+       rest:'',
+       weekDays:'',
+       observartion:''
+
 
    
       
@@ -106,7 +113,8 @@
     this.loadExercises()
   },
 
-  methods:{
+  
+    methods: {
     
     loadExercises() {
 
@@ -123,8 +131,17 @@
           alert('Não foi possível Acessar a Lista de Exercícios')
         })
     },
-     
-}}
+    async registerWorkout(){
+      const {valid} = await this.$refs.form.validate()
+
+      if(!valid){
+        alert("Preencha todos os dados!")
+        return
+      }
+
+    }
+  }
+}
  </script>
  
  <style>
