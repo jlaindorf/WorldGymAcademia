@@ -65,7 +65,9 @@
             sm="12"
           >
           <v-select  label="Dia da Semana" 
-          :items="['Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira','Sábado','Domingo']"
+          :items="items"
+          :item-title="text"
+          :item-value="value"
           v-model="weekDays"
            variant="outlined"
            :rules="[value => !!value || 'Dado obrigatório']" >
@@ -73,7 +75,7 @@
           </v-select>
           </v-col>
           <v-textarea
-             autocomplete="Observações"
+           
               label="Observações"
               v-model="observation"
               :rules="[value => !!value || 'Dado obrigatório']" >
@@ -100,15 +102,16 @@
    data() {
      return {
 
-        items: {
-        segunda: 'Segunda-Feira',
-        terca: 'Terça-Feira',
-        quarta: 'Quarta-Feira',
-        quinta: 'Quinta-Feira',
-        sexta: 'Sexta-Feira',
-        sabado: 'Sábado',
-        domingo: 'Domingo'
-      },
+        items: [ 
+      { title:'Segunda-Feira', value: this.segunda},
+      { title: 'Terça-Feira', value: this.terca},
+      { title: 'Quarta-Feira', value:this.quarta},
+      { title: 'Quinta-Feira', value: this.quinta},
+      { title: 'Sexta-Feira', value: this.sexta},
+      { title: 'Sábado', value: this.sabado},
+      { title: 'Domingo', value: this.domingo}
+        
+      ],
        exercises:[],
        selectedExercise:'',
        reps:'',
@@ -117,7 +120,15 @@
        weekDays:'',
        observation:'',
        studentId: this.$route.params.id ,
-       exerciseId:''
+       exerciseId:'',
+       segunda:'',
+       terca:'',
+       quarta:'',
+       quinta:'',
+       sexta:'',
+       sabado:'',
+       domingo:'',
+
 
 
    
