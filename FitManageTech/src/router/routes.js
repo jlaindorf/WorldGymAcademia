@@ -28,7 +28,7 @@ const router = createRouter({
       component: cadastroaluno
     },
     {
-      path: '/cadastro-treino',
+      path: '/cadastro-treino/:id/cadastrar',
       name: 'CadastroTreino',
       component: cadastrotreino
     },
@@ -48,7 +48,7 @@ const router = createRouter({
       component: gerenciaexercicio
     },
     {
-      path: '/visualizacao-treinos',
+      path: '/visualizacao-treinos/:id/Ver-treino',
       name: 'visualizatreinos',
       component: visualizatreinos
     }
