@@ -97,7 +97,7 @@ this.$router.push(`/cadastro-treino/${id}/cadastrar`)
 ,
 seeTrainning(id){
 
-this.$router.push(`/visualizacao-treinos${id}/Ver-treino`)
+this.$router.push(`/visualizacao-treinos/${id}/Ver-treino`)
 }
 
 ,
