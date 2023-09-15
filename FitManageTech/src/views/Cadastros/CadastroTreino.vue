@@ -66,8 +66,8 @@
           >
           <v-select  label="Dia da Semana" 
           :items="items"
-          :item-title="text"
-          :item-value="value"
+          item-title="title"
+          item-value="value"
           v-model="weekDays"
            variant="outlined"
            :rules="[value => !!value || 'Dado obrigatório']" >
@@ -103,13 +103,14 @@
      return {
 
         items: [ 
-      { title:'Segunda-Feira', value: this.segunda},
-      { title: 'Terça-Feira', value: this.terca},
-      { title: 'Quarta-Feira', value:this.quarta},
-      { title: 'Quinta-Feira', value: this.quinta},
-      { title: 'Sexta-Feira', value: this.sexta},
-      { title: 'Sábado', value: this.sabado},
-      { title: 'Domingo', value: this.domingo}
+      { title: 'Domingo', value: 'domingo'},
+      { title:'Segunda-Feira', value: 'segunda'},
+      { title: 'Terça-Feira', value: 'terca'},
+      { title: 'Quarta-Feira', value:'quarta'},
+      { title: 'Quinta-Feira', value:'quinta'},
+      { title: 'Sexta-Feira', value: 'sexta'},
+      { title: 'Sábado', value: 'sabado'}
+     
         
       ],
        exercises:[],
@@ -121,14 +122,7 @@
        observation:'',
        studentId: this.$route.params.id ,
        exerciseId:'',
-       segunda:'',
-       terca:'',
-       quarta:'',
-       quinta:'',
-       sexta:'',
-       sabado:'',
-       domingo:'',
-
+       
 
 
    
@@ -137,7 +131,7 @@
    },
    mounted() {
     this.loadExercises()
-    const diasDaSemana = ['Domingo', 'Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira','Sábado'];
+    const diasDaSemana = this.items
     const dataAtual = new Date();
     this.weekDays = diasDaSemana[dataAtual.getDay()];
   
@@ -155,7 +149,7 @@
       })
         .then((response) => {
             this.exercises = response.data
-            console.log(this.exercises.description)
+       
             
         })
          
