@@ -97,22 +97,20 @@
   </template>
  
  <script>
- import axios  from 'axios';
+ import axios  from 'axios'
  export default {
    data() {
      return {
+      items: [
+  { title: 'Domingo', value: 'domingo' },
+  { title: 'Segunda-Feira', value: 'segunda' },
+  { title: 'Terça-Feira', value: 'terca' },
+  { title: 'Quarta-Feira', value: 'quarta' },
+  { title: 'Quinta-Feira', value: 'quinta' },
+  { title: 'Sexta-Feira', value: 'sexta' },
+  { title: 'Sábado', value: 'sabado' }
+],
 
-        items: [ 
-      { title: 'Domingo', value: 'domingo'},
-      { title:'Segunda-Feira', value: 'segunda'},
-      { title: 'Terça-Feira', value: 'terca'},
-      { title: 'Quarta-Feira', value:'quarta'},
-      { title: 'Quinta-Feira', value:'quinta'},
-      { title: 'Sexta-Feira', value: 'sexta'},
-      { title: 'Sábado', value: 'sabado'}
-     
-        
-      ],
        exercises:[],
        selectedExercise:'',
        reps:'',
@@ -129,14 +127,15 @@
       
      }
    },
-   mounted() {
-    this.loadExercises()
-    const diasDaSemana = this.items
-    const dataAtual = new Date();
-    this.weekDays = diasDaSemana[dataAtual.getDay()];
-  
+ 
+    mounted() {
+  this.loadExercises();
+  const dataAtual = new Date();
+  this.weekDays = this.items[dataAtual.getDay()].value; // Pegar o valor (value) do item selecionado
+},
+
     
-  },
+  
 
   
     methods: {
