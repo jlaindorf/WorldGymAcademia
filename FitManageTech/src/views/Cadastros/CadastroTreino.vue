@@ -191,6 +191,15 @@
         .then((response) => {
             alert('Cadastrado com sucesso');
             console.log(response.data);
+            this.selectedExercise = '';
+            this.reps = '';
+            this.kilos = '';
+            this.rest = '';
+            this.observation = '';
+           this.$nextTick(() => {
+           this.$refs.form.resetValidation();
+      });
+   
            
           })
           .catch(() => {
