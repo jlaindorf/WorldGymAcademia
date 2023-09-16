@@ -3,7 +3,7 @@
     
 
 
-      <v-card class="mx-auto" prepend-icon="mdi mdi-account" style="width: 1215px" v-model="dias" value="segunda">
+      <v-card color="transparent" class="mx-auto" prepend-icon="mdi mdi-account" style="width: 1215px" v-model="dias" value="segunda">
 
         <div v-if="listaTreinos.length > 0">
           <h2> {{ listaTreinos[0].student_name }}</h2>
@@ -29,14 +29,13 @@
 
   </v-form>
 
-  <v-card>
+  <v-card >
     <v-toolbar color="blue">
 
 
       <v-toolbar-title>Treinos da Semana</v-toolbar-title>
 
-      <v-spacer></v-spacer>
-
+ 
 
 
 
@@ -56,7 +55,7 @@
     </v-toolbar>
     <v-window v-model="dias">
       <v-window-item value="segunda">
-        <v-table>
+        <v-table >
           <thead>
             <tr class="text-left">
               <th>Exercício</th>
