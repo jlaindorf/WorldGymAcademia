@@ -8,22 +8,27 @@
 
     <v-card class="mx-auto" width="400" prepend-icon="mdi-account-multiple">
       <template v-slot:title>
-        Alunos
+        Alunos  
+        <h1>{{ qtdAlunos }}</h1>  
       </template>
 
       <v-card-text>
-        <h1>{{ qtdAlunos }}</h1>
+       
+        <v-btn type="submit" color="blue" @click="newStudent" prepend-icon="mdi-plus" variant="tonal">Adicionar Aluno</v-btn>
       </v-card-text>
+      
     </v-card>
 
 
     <v-card class="mx-auto" width="400" prepend-icon="mdi-arm-flex">
       <template v-slot:title>
         Exercícios
+        <h1>{{ qtdExercicios }}</h1>
       </template>
 
       <v-card-text>
-        <h1>{{ qtdExercicios }}</h1>
+       
+        <v-btn type="submit" color="blue" @click="newTrain" prepend-icon="mdi-plus" variant="tonal">Adicionar Exercício</v-btn>
       </v-card-text>
     </v-card>
   </main>
@@ -59,7 +64,19 @@ export default {
   })
   .catch((error) => {
     console.error('Erro ao buscar dados do servidor:', error);
-  });
+  })
+},
+methods:{
+
+  newStudent(){
+
+    this.$router.push('/cadastro-aluno')
+  },
+
+  newTrain(){
+    this.$router.push('/gerenciamento-exercicios')
+  }
+
 }
   
   
