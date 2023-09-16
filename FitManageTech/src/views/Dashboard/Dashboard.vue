@@ -1,8 +1,6 @@
 <template>
-   <div class="logo">Fit Manage Tech
-        <span class="mdi mdi-weight-lifter"></span>
-        </div>
-  <h1>Bem Vindo,{{ nome }}</h1>
+  
+  <h1>Bem Vindo, {{ nome }}</h1>
 
   <main>
 
@@ -90,19 +88,6 @@ main {
   flex-direction: row;
   align-content: space-between;
 }
-.logo {
-            font-family: Arial, sans-serif;
-            font-size: 20px;
-            font-weight: bold;
-            color: #3498db; /* Cor azul */
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            width: 80%;
-           
-        }
-        .mdi {
-          width: 30%;
-        }
+
         
 </style>

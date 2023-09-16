@@ -1,18 +1,16 @@
 <template>
   <v-form ref="form">
-    <div class="logo">Fit Manage Tech
-      <span class="mdi mdi-weight-lifter"></span>
-
+    
 
 
       <v-card class="mx-auto" prepend-icon="mdi mdi-account" style="width: 1215px" v-model="dias" value="segunda">
 
         <div v-if="listaTreinos.length > 0">
-          {{ listaTreinos[0].student_name }}
+          <h2> {{ listaTreinos[0].student_name }}</h2>
         </div>
 
         <v-card-text>
-          Treino do dia
+          <h1>Treino do dia</h1>
         </v-card-text>
 
        
@@ -26,7 +24,7 @@
         </ul>
       </v-card>
 
-    </div>
+   
 
 
   </v-form>

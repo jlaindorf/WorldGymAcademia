@@ -1,8 +1,5 @@
 <template>
-    <div>
-        <div class="logo">Fit Manage Tech
-        <span class="mdi mdi-weight-lifter" ></span>
-      </div>
+  
       <v-row>
      <v-col cols="8">
         <h1>Alunos</h1>
@@ -11,14 +8,13 @@
       <v-btn type="submit" color="blue" @click="newStudent" prepend-icon="mdi-plus" variant="tonal">Novo</v-btn>
     </v-col>
     </v-row>
-    </div>
+   
 
     <v-form ref="form">
         <v-row align="center" justify="center">
     <v-col cols="6"> 
         <v-text-field label="Nome do Aluno" prepend-icon="mdi-account-search"
-     v-model="aluno"  :rules="[value => !!value || 'É obrigatório colocar o Nome']"
-></v-text-field>
+     v-model="aluno"  :rules="[value => !!value || 'É obrigatório colocar o Nome']"></v-text-field>
 
     </v-col>
     <v-col cols="2"> 
@@ -31,17 +27,20 @@
 
 <v-table >
     <thead>
-      <tr>
-        <th class="text-left">Alunos Cadastrados</th>
+      <tr class="text-left">
+        <th >Alunos Cadastrados</th>
+        
       </tr>
+      
     </thead>
-    <tbody>
+    <tbody  >
       <tr v-for="aluno in listaAlunos" :key="aluno.name">
-  <td>{{ aluno.name }}
-  <v-btn @click.prevent="setUpTtrainning(aluno.id)" color="blue" variant="tonal">Montar treino</v-btn>
-  <v-btn  @click.prevent="seeTrainning(aluno.id)" color="blue" variant="tonal">Ver</v-btn></td>
+  <td>{{ aluno.name }}</td>
+    
+  <td> <v-btn size="Small" @click.prevent="setUpTtrainning(aluno.id)" color="blue" variant="tonal">Montar treino</v-btn></td>
+  <td><v-btn  size="Small"  @click.prevent="seeTrainning(aluno.id)" color="blue" variant="tonal">Ver</v-btn></td>
 </tr>
-     
+
     </tbody>
   </v-table>
 
@@ -112,19 +111,3 @@ this.$router.push(`/visualizacao-treinos/${id}/Ver-treino`)
 }}
 </script>
 
-
-<style>
-  .logo {
-            font-family: Arial, sans-serif;
-            font-size: 20px;
-            font-weight: bold;
-            color: #3498db; /* Cor azul */
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            width: 80%;
-           
-        }
-        .mdi {
-          width: 30%;}
-</style>

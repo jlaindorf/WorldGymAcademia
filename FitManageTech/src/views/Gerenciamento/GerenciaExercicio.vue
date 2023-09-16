@@ -1,14 +1,12 @@
 <template>
   <div>
-    <div class="logo">Fit Manage Tech
-      <span class="mdi mdi-weight-lifter"></span>
-    </div>
+  
     <h1>Gerenciamento de Exercícios</h1>
   </div>
 
   <v-form ref="form" @submit="getExercise">
     <v-row align="center" justify="center">
-      <v-col cols="6">
+      <v-col cols="8">
         <v-text-field label="Exercício" prepend-icon="mdi-arm-flex" v-model="exercicio"
           :rules="[value => !!value || 'É obrigatório colocar o exercício']"></v-text-field>
       </v-col>
@@ -19,16 +17,18 @@
 
   </v-form>
 
-  <v-table>
+  <v-table >
     <thead>
       <tr>
         <th class="text-left">Exercícios cadastrados</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody >
+      <v-col >
       <tr v-for="exercicio in listaExercicios" :key="exercicio.id">
         <td>{{ exercicio.description }}</td>
       </tr>
+    </v-col>
     </tbody>
   </v-table>
 </template>

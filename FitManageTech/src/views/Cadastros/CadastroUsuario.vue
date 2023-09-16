@@ -1,10 +1,10 @@
 <template>
   <v-form ref="form" @submit.prevent="handleCreateAccount">
     <v-card class="mx-auto pa-12 pb-8" elevation="8" max-width="448" rounded="lg">
-      <div class="logo">Fit Manage Tech
+      <div class="logo">WorldGym
         <span class="mdi mdi-weight-lifter"></span>
-        <h3>Cadastro de Usuário</h3>
       </div>
+      <h2>Cadastro de Usuário</h2>
       <div class="text-subtitle-1 text-medium-emphasis">Nome Completo</div>
       <v-text-field v-model="usuario.name" density="compact" placeholder="Digite seu nome Completo"
         prepend-inner-icon="mdi-note-edit-outline" variant="outlined" :class="{ 'input-error': this.errors.name }">
