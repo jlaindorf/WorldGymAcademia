@@ -28,11 +28,7 @@
 
       <template v-slot:extension>
         <v-tabs v-model="dias" centered>
-          <!-- <v-tab
-        v-for="workout in listaTreinos" :key="workout.id"
-        >
-          {{workout.day }}
-                  </v-tab> -->
+      
           <v-tab value="segunda">Segunda</v-tab>
           <v-tab value="terca">Terca</v-tab>
           <v-tab value="quarta">Quarta</v-tab>
@@ -40,8 +36,6 @@
           <v-tab value="sexta">Sexta</v-tab>
           <v-tab value="sabado">sabado</v-tab>
           <v-tab value="domingo">domingo</v-tab>
-
-
 
         </v-tabs>
       </template>
@@ -179,26 +173,7 @@
         </v-table>
       </v-window-item>
     </v-window>
-    <!-- <table>
-     <thead>
-    
-       <tr>
-      
-         <th>Exercício</th>
-         <th>Repetições</th>
-         <th>Pausa (s)</th>
-       </tr>
-     </thead>
-     <tbody>
-       <tr v-for="workout in listaTreinos" :key="workout.id">
-         
-         <td>{{ workout.exercise_description}}</td>
-         <td>{{ workout.repetitions }}</td>
-         <td>{{ workout.break_time }}</td>
-       </tr>
-     </tbody>
-    
-   </table> -->
+  
   </v-card>
 </template>
 
