@@ -66,8 +66,8 @@
           >
           <v-select  label="Dia da Semana" 
           :items="items"
-          :item-title="text"
-          :item-value="value"
+          item-title="title"
+          item-value="value"
           v-model="weekDays"
            variant="outlined"
            :rules="[value => !!value || 'Dado obrigatório']" >
@@ -97,21 +97,20 @@
   </template>
  
  <script>
- import axios  from 'axios';
+ import axios  from 'axios'
  export default {
    data() {
      return {
+      items: [
+  { title: 'Domingo', value: 'domingo' },
+  { title: 'Segunda-Feira', value: 'segunda' },
+  { title: 'Terça-Feira', value: 'terca' },
+  { title: 'Quarta-Feira', value: 'quarta' },
+  { title: 'Quinta-Feira', value: 'quinta' },
+  { title: 'Sexta-Feira', value: 'sexta' },
+  { title: 'Sábado', value: 'sabado' }
+],
 
-        items: [ 
-      { title:'Segunda-Feira', value: this.segunda},
-      { title: 'Terça-Feira', value: this.terca},
-      { title: 'Quarta-Feira', value:this.quarta},
-      { title: 'Quinta-Feira', value: this.quinta},
-      { title: 'Sexta-Feira', value: this.sexta},
-      { title: 'Sábado', value: this.sabado},
-      { title: 'Domingo', value: this.domingo}
-        
-      ],
        exercises:[],
        selectedExercise:'',
        reps:'',
@@ -121,28 +120,22 @@
        observation:'',
        studentId: this.$route.params.id ,
        exerciseId:'',
-       segunda:'',
-       terca:'',
-       quarta:'',
-       quinta:'',
-       sexta:'',
-       sabado:'',
-       domingo:'',
-
+       
 
 
    
       
      }
    },
-   mounted() {
-    this.loadExercises()
-    const diasDaSemana = ['Domingo', 'Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira','Sábado'];
-    const dataAtual = new Date();
-    this.weekDays = diasDaSemana[dataAtual.getDay()];
-  
+ 
+    mounted() {
+  this.loadExercises();
+  const dataAtual = new Date();
+  this.weekDays = this.items[dataAtual.getDay()].value; // Pegar o valor (value) do item selecionado
+},
+
     
-  },
+  
 
   
     methods: {
@@ -155,7 +148,7 @@
       })
         .then((response) => {
             this.exercises = response.data
-            console.log(this.exercises.description)
+       
             
         })
          
