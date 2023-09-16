@@ -1,12 +1,50 @@
 <template>
-   <div>
-     <h1>Visualizar Treinos</h1>
-     
+ 
+    <v-form ref="form"  >
+       <div class="logo">Fit Manage Tech
+         <span class="mdi mdi-weight-lifter"></span>
+        <h4 class="mdi mdi-account-multiple">Treino </h4>
+        <div v-if="listaTreinos.length > 0">
+          {{ listaTreinos[0].student_name }}
+        </div>
+        </div>
+        </v-form>
+    
+  <v-card>
+    <v-toolbar color="blue">
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+
+      <v-toolbar-title>Page title</v-toolbar-title>
+
+      <v-spacer></v-spacer>
+
+      <v-btn icon>
+        <v-icon>mdi-magnify</v-icon>
+      </v-btn>
+
+      <v-btn icon>
+        <v-icon>mdi-dots-vertical</v-icon>
+      </v-btn>
+      
+
+      <template v-slot:extension>
+        <v-tabs
+         
+          centered
+        >
+          <v-tab
+          v-for="workout in listaTreinos" :key="workout.id"
+          >
+            {{workout.day }}
+                    </v-tab>
+        </v-tabs>
+      </template>
+    </v-toolbar>
      <table>
        <thead>
       
          <tr>
-           <th>Dia da Semana</th>
+        
            <th>Exercício</th>
            <th>Repetições</th>
            <th>Pausa (s)</th>
@@ -14,14 +52,15 @@
        </thead>
        <tbody>
          <tr v-for="workout in listaTreinos" :key="workout.id">
-           <td>{{ workout.day }}</td>
+           
            <td>{{ workout.exercise_description}}</td>
            <td>{{ workout.repetitions }}</td>
            <td>{{ workout.break_time }}</td>
          </tr>
        </tbody>
+       {{ listaTreinos }}
      </table>
-   </div>
+ </v-card>
  </template>
  
  <script>
