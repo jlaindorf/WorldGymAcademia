@@ -1,15 +1,14 @@
 <template>
- 
-    <v-form ref="form"  >
-       <div class="logo">Fit Manage Tech
-         <span class="mdi mdi-weight-lifter"></span>
-        <h4 class="mdi mdi-account-multiple">Treino </h4>
-        <div v-if="listaTreinos.length > 0">
-          {{ listaTreinos[0].student_name }}
-        </div>
-        </div>
-        </v-form>
-    
+  <v-form ref="form">
+    <div class="logo">Fit Manage Tech
+      <span class="mdi mdi-weight-lifter"></span>
+      <h4 class="mdi mdi-account-multiple">Treino </h4>
+      <div v-if="listaTreinos.length > 0">
+        {{ listaTreinos[0].student_name }}
+      </div>
+    </div>
+  </v-form>
+
   <v-card>
     <v-toolbar color="blue">
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
@@ -25,86 +24,144 @@
       <v-btn icon>
         <v-icon>mdi-dots-vertical</v-icon>
       </v-btn>
-      
+
 
       <template v-slot:extension>
-        <v-tabs
-         
-          centered
+        <v-tabs v-model="dias" centered>
+          <!-- <v-tab
+        v-for="workout in listaTreinos" :key="workout.id"
         >
-          <v-tab
-          v-for="workout in listaTreinos" :key="workout.id"
-          >
-            {{workout.day }}
-                    </v-tab>
+          {{workout.day }}
+                  </v-tab> -->
+          <v-tab value="segunda">Segunda</v-tab>
+          <v-tab value="terca">Terca</v-tab>
+          <v-tab value="quarta">Quarta</v-tab>
+          <v-tab value="quinta">Quinta</v-tab>
+          <v-tab value="sexta">Sexta</v-tab>
+          <v-tab value="sabado">sabado</v-tab>
+          <v-tab value="domingo">domingo</v-tab>
+
+
+
         </v-tabs>
       </template>
     </v-toolbar>
-     <table>
-       <thead>
+    <v-window v-model="dias">
+      <v-window-item value="segunda">
+       <ul v-for="workout in listaTreinos" :key="workout.id" >
+        <li>{{ workout.exercise_description}}</li>
+         <li>{{ workout.repetitions }}</li>
+         <li>{{ workout.break_time }}</li>
+       </ul>
+      </v-window-item>
+
+      <v-window-item value="terca">
+        <ul v-for="workout in listaTreinos" :key="workout.id" >
+        <li>{{ workout.exercise_description}}</li>
+         <li> Repetições{{ workout.repetitions }}  </li>
+         <li>{{ workout.break_time }}</li>
+       </ul>
+      </v-window-item>
+
+      <v-window-item value="quarta">
+        Three
+      </v-window-item>
+      <v-window-item value="quinta">
+        One
+      </v-window-item>
+
+      <v-window-item value="sexta">
+        <ul v-for="workout in listaTreinos" :key="workout.id" >
+        <li>{{ workout.exercise_description}}</li>
+         <li>{{ workout.repetitions }}</li>
+         <li>{{ workout.break_time }}</li>
+       </ul>
+      </v-window-item>
+
+      <v-window-item value="sabado">
+        Three
+      </v-window-item>
+      <v-window-item value="domingo">
+        Three
+      </v-window-item>
+    </v-window>
+    <!-- <table>
+     <thead>
+    
+       <tr>
       
-         <tr>
-        
-           <th>Exercício</th>
-           <th>Repetições</th>
-           <th>Pausa (s)</th>
-         </tr>
-       </thead>
-       <tbody>
-         <tr v-for="workout in listaTreinos" :key="workout.id">
-           
-           <td>{{ workout.exercise_description}}</td>
-           <td>{{ workout.repetitions }}</td>
-           <td>{{ workout.break_time }}</td>
-         </tr>
-       </tbody>
-       {{ listaTreinos }}
-     </table>
- </v-card>
- </template>
- 
- <script>
- import axios from 'axios';
- 
- export default {
-   data() {
-     return {
-       studentId: this.$route.params.id,
-       listaTreinos: [],
-       seg: '',
-       terca: '',
-       qua: '',
-       qui: '',
-       sex: '',
-       sab: '',
-       dom: '',
-     };
-   },
-   mounted() {
-     this.loadWorkout();
-   },
-   methods: {
-     loadWorkout() {
-       axios({
-         url: `http://localhost:3000/workouts?student_id=${this.studentId}`,
-         method: 'GET',
-       })
-         .then((response) => {
-           this.listaTreinos = response.data.workouts
-       
-           this.seg = response.data.segunda
-           this.terca = response.data.terca
-           this.qua = response.data.quarta
-           this.qui = response.data.quinta
-           this.sex = response.data.sexta
-           this.sab = response.data.sabado
-           this.dom = response.data.domingo
-         })
-         .catch(() => {
-           alert('Não foi possível acessar a lista de exercícios.')
-         });
-     },
-   },
- }
- </script>
- 
+         <th>Exercício</th>
+         <th>Repetições</th>
+         <th>Pausa (s)</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr v-for="workout in listaTreinos" :key="workout.id">
+         
+         <td>{{ workout.exercise_description}}</td>
+         <td>{{ workout.repetitions }}</td>
+         <td>{{ workout.break_time }}</td>
+       </tr>
+     </tbody>
+    
+   </table> -->
+  </v-card>
+</template>
+
+<script>
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+    
+      studentId: this.$route.params.id,
+      listaTreinos: [],
+
+      dias: 'segunda'
+    };
+  },
+    mounted() {
+    this.loadWorkout();
+   
+  },
+  watch:{
+
+    dias(){
+      this.dias = this.dias
+      this.loadWorkout();
+      console.log(this.dias)
+    }
+
+
+  },
+  methods: {
+    loadWorkout() {
+      axios({
+        url: `http://localhost:3000/workouts?student_id=${this.studentId}`,
+        method: 'GET',
+      })
+        .then((response) => {
+          this.listaTreinos = response.data.workouts
+          this.listaTreinos = this.listaTreinos.filter(item=>item.day==this.dias)
+
+
+          console.log(this.listaTreinos)
+
+
+        })
+        .catch(() => {
+          alert('Não foi possível acessar a lista de exercícios.')
+        });
+    },
+
+  },
+  // searchTrain() {
+
+  //   const buscaDia = "segunda"
+  //   this.listaTreinos = this.listaTreinos.filter(item => item.day.includes(buscaDia))
+  //   console.log(this.listaTreinos)
+  // }
+
+}
+</script>
