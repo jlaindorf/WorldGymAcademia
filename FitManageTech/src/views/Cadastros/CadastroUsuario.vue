@@ -53,7 +53,7 @@
       </v-btn>
 
       <v-card-text class="text-center">
-        <a @click="cadastroConcluido" class="text-blue text-decoration-none" href="#" rel="noopener noreferrer"
+        <a @click.prevent="cadastroConcluido" class="text-blue text-decoration-none" href="#" rel="noopener noreferrer"
           target="_blank">
           <v-icon icon="mdi-chevron-left"></v-icon>Voltar à tela de Login
         </a>
@@ -153,6 +153,9 @@ export default {
           this.errors = captureErrorYup(error)
         }
       }
+    },
+    cadastroConcluido(){
+      this.$router.push('/')
     }
   }
 }
