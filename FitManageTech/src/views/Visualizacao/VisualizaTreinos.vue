@@ -48,41 +48,135 @@
     </v-toolbar>
     <v-window v-model="dias">
       <v-window-item value="segunda">
-       <ul v-for="workout in listaTreinos" :key="workout.id" >
-        <li>{{ workout.exercise_description}}</li>
-         <li>{{ workout.repetitions }}</li>
-         <li>{{ workout.break_time }}</li>
-       </ul>
+        <v-table>
+          <thead>
+          <tr class="text-left">
+            <th>Exercício</th>
+              <th>Repetições</th>
+              <th>Pausa (s)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="workout in listaTreinos" :key="workout.id">
+              <td>{{ workout.exercise_description }}</td>
+              <td>{{ workout.repetitions }}</td>
+              <td>{{ workout.break_time }}</td>
+            </tr>
+          </tbody>
+        </v-table>
       </v-window-item>
 
       <v-window-item value="terca">
-        <ul v-for="workout in listaTreinos" :key="workout.id" >
-        <li>{{ workout.exercise_description}}</li>
-         <li> Repetições{{ workout.repetitions }}  </li>
-         <li>{{ workout.break_time }}</li>
-       </ul>
+        <v-table>
+          <thead>
+          <tr class="text-left">
+            <th>Exercício</th>
+              <th>Repetições</th>
+              <th>Pausa (s)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="workout in listaTreinos" :key="workout.id">
+              <td>{{ workout.exercise_description }}</td>
+              <td>{{ workout.repetitions }}</td>
+              <td>{{ workout.break_time }}</td>
+            </tr>
+          </tbody>
+        </v-table>
+
       </v-window-item>
 
       <v-window-item value="quarta">
-        Three
+        <v-table>
+          <thead>
+          <tr class="text-left">
+            <th>Exercício</th>
+              <th>Repetições</th>
+              <th>Pausa (s)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="workout in listaTreinos" :key="workout.id">
+              <td>{{ workout.exercise_description }}</td>
+              <td>{{ workout.repetitions }}</td>
+              <td>{{ workout.break_time }}</td>
+            </tr>
+          </tbody>
+        </v-table>
       </v-window-item>
       <v-window-item value="quinta">
-        One
+        <v-table>
+          <thead>
+          <tr class="text-left">
+            <th>Exercício</th>
+              <th>Repetições</th>
+              <th>Pausa (s)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="workout in listaTreinos" :key="workout.id">
+              <td>{{ workout.exercise_description }}</td>
+              <td>{{ workout.repetitions }}</td>
+              <td>{{ workout.break_time }}</td>
+            </tr>
+          </tbody>
+        </v-table>
       </v-window-item>
 
       <v-window-item value="sexta">
-        <ul v-for="workout in listaTreinos" :key="workout.id" >
-        <li>{{ workout.exercise_description}}</li>
-         <li>{{ workout.repetitions }}</li>
-         <li>{{ workout.break_time }}</li>
-       </ul>
+        <v-table>
+          <thead>
+          <tr class="text-left">
+            <th>Exercício</th>
+              <th>Repetições</th>
+              <th>Pausa (s)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="workout in listaTreinos" :key="workout.id">
+              <td>{{ workout.exercise_description }}</td>
+              <td>{{ workout.repetitions }}</td>
+              <td>{{ workout.break_time }}</td>
+            </tr>
+          </tbody>
+        </v-table>
       </v-window-item>
 
       <v-window-item value="sabado">
-        Three
+        <v-table>
+          <thead>
+          <tr class="text-left">
+            <th>Exercício</th>
+              <th>Repetições</th>
+              <th>Pausa (s)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="workout in listaTreinos" :key="workout.id">
+              <td>{{ workout.exercise_description }}</td>
+              <td>{{ workout.repetitions }}</td>
+              <td>{{ workout.break_time }}</td>
+            </tr>
+          </tbody>
+        </v-table>
       </v-window-item>
       <v-window-item value="domingo">
-        Three
+        <v-table>
+          <thead>
+          <tr class="text-left">
+            <th>Exercício</th>
+              <th>Repetições</th>
+              <th>Pausa (s)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="workout in listaTreinos" :key="workout.id">
+              <td>{{ workout.exercise_description }}</td>
+              <td>{{ workout.repetitions }}</td>
+              <td>{{ workout.break_time }}</td>
+            </tr>
+          </tbody>
+        </v-table>
       </v-window-item>
     </v-window>
     <!-- <table>
@@ -114,20 +208,20 @@ import axios from 'axios';
 export default {
   data() {
     return {
-    
+
       studentId: this.$route.params.id,
       listaTreinos: [],
 
       dias: 'segunda'
     };
   },
-    mounted() {
+  mounted() {
     this.loadWorkout();
-   
-  },
-  watch:{
 
-    dias(){
+  },
+  watch: {
+
+    dias() {
       this.dias = this.dias
       this.loadWorkout();
       console.log(this.dias)
@@ -143,7 +237,7 @@ export default {
       })
         .then((response) => {
           this.listaTreinos = response.data.workouts
-          this.listaTreinos = this.listaTreinos.filter(item=>item.day==this.dias)
+          this.listaTreinos = this.listaTreinos.filter(item => item.day == this.dias)
 
 
           console.log(this.listaTreinos)
