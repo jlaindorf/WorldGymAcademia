@@ -12,7 +12,7 @@
         </div>
 
         <v-card-text>
-          Treino de Hoje
+          Treino do dia
         </v-card-text>
 
        
