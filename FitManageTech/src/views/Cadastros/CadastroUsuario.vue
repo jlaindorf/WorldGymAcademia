@@ -40,7 +40,7 @@
       <span class="message-error"> {{ this.errors.verifyPassword }} </span>
 
       <div class="text-subtitle-1 text-medium-emphasis">Selecione seu Plano</div>
-      <v-select v-model="usuario.planType" :items="['Bronze', 'Prata', 'Ouro']" variant="outlined"
+      <v-select v-model="usuario.planType" :items="items" item-title="title" item-value="value" variant="outlined"
         :class="{ 'input-error': this.errors.planType }"></v-select>
       <span class="message-error"> {{ this.errors.planType }} </span>
 
@@ -71,11 +71,12 @@ export default {
   data() {
     return {
 
-      items: {
-        bronze: 'bronze',
-        silver: 'prata',
-        gold: 'ouro'
-      },
+      items: [
+        { title: 'Bronze', value: 'bronze' },
+        { title: 'Prata', value: 'silver' },
+        { title: 'Ouro', value: 'gold' },
+      ],
+
       usuario: {
         name: "",
         email: "",
@@ -89,7 +90,7 @@ export default {
   methods: {
     handleCreateAccount() {
       try {
-      
+
         const schema = Yup.object().shape({
           name: Yup.string().required('Nome é obrigatório'),
           email: Yup.string().email('Email não é valido').required('Email é obrigatório'),
@@ -103,7 +104,7 @@ export default {
             .required('A confirmação é necessária')
             .oneOf([
               Yup.ref('password')], 'As senhas devem coincidir'),
-          planType: Yup.string().required('Escolha um plano').oneOf(['Bronze', 'Prata', 'Ouro']),
+          planType: Yup.string().required('Escolha um plano').oneOf(this.items.map(item => item.value), 'Plano inválido'),
 
         })
 
@@ -154,7 +155,7 @@ export default {
         }
       }
     },
-    cadastroConcluido(){
+    cadastroConcluido() {
       this.$router.push('/')
     }
   }
