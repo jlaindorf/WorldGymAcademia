@@ -1,85 +1,69 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+<template>
+    <img class="base"
+        src="https://img.freepik.com/fotos-gratis/pesos-de-exercicios-dumbbell-de-ferro-com-placas-extra_1423-223.jpg?w=1380&t=st=1694903627~exp=1694904227~hmac=9f9c897d4957bafd20ce5e3ce064c63ddc881a5cddf7c867f17ab2989c265f08"
+        alt="piso-de-academia-com-halteres">
+    <v-layout>
+        <v-app-bar color="blue" v-if="renderizarMenu">
+            <v-app-bar-title class="mdi mdi-weight-lifter">WorldGym</v-app-bar-title>
+
+
+
+            <v-btn class="menu">
+                <router-link to="/dashboard">
+                    <span class="menu-text">Dashboard</span>
+                </router-link>
+            </v-btn>
+            <v-btn class="menu">
+                <router-link to="/gerenciamento-aluno">
+                    <span class="menu-text">Alunos</span>
+                </router-link>
+            </v-btn>
+            <v-btn class="menu">
+                <router-link to="/gerenciamento-exercicios">
+                    <span class="menu-text">Exercícios</span>
+                </router-link>
+            </v-btn>
+            <v-btn class="menu">
+                <router-link to="/">
+                    <span class="menu-text">Sair</span>
+                </router-link>
+            </v-btn>
+        </v-app-bar>
+
+        <v-main>
+            <router-view></router-view>
+        </v-main>
+    </v-layout>
+</template>
+  
+<script>
+export default {
+    computed: {
+        renderizarMenu() {
+            return this.$route.path !== '/' && this.$route.path !== '/cadastro-novo'
+        }
+    }
+}
 </script>
 
-<template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+<style >
+.menu-text {
+    text-transform: none;
+    font-family: roboto, sans-serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: black;
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
-</template>
-
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
+.base {
 
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+    opacity: 0.1;
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    background-size: cover;
 }
 </style>
+
+  
