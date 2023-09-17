@@ -47,4 +47,4 @@ npm run dev
 ### Agradecimento aos Colegas e professores que incentivaram esse projeto do início ao fim 
 ✨Julio L. Laindorf✨
 
-<a href="https://github.com/jlaindorf"><img src="/FitManageTech/public/svg/github.svg"alt="GitHub" width="50"> 
+[<img src="/FitManageTech/public/svg/github.svg" alt="GitHub" width="50">](https://github.com/jlaindorf)
