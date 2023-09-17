@@ -1,6 +1,6 @@
 <template>
   <div>
-  
+
     <h1>Gerenciamento de Exercícios</h1>
   </div>
 
@@ -17,18 +17,18 @@
 
   </v-form>
 
-  <v-table >
+  <v-table>
     <thead>
       <tr>
         <th class="text-left">Exercícios cadastrados</th>
       </tr>
     </thead>
-    <tbody >
-      <v-col >
-      <tr v-for="exercicio in listaExercicios" :key="exercicio.id">
-        <td>{{ exercicio.description }}</td>
-      </tr>
-    </v-col>
+    <tbody>
+      <v-col>
+        <tr v-for="exercicio in listaExercicios" :key="exercicio.id">
+          <td>{{ exercicio.description }}</td>
+        </tr>
+      </v-col>
     </tbody>
   </v-table>
 </template>

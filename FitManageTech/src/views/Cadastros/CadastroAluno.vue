@@ -20,10 +20,10 @@
           <v-text-field label="Contato" type="phone" v-model="contato"
             :rules="[value => !!value || 'Número de contato obrigatório']" variant="outlined"></v-text-field>
         </v-col>
-     
+
         <v-col cols="12" sm="6">
-          <div  >
-            <VueDatePicker  placeholder="Data De Nascimento" :max="new Date()" locale="pt-BR" :enable-time-picker="false"
+          <div>
+            <VueDatePicker placeholder="Data De Nascimento" :max="new Date()" locale="pt-BR" :enable-time-picker="false"
               v-model="dataSelecionada" type="date" />
           </div>
         </v-col>
@@ -181,7 +181,8 @@ export default {
 .mdi {
   width: 30%;
 }
-.data{
+
+.data {
   height: 50px;
   width: 150%;
 }

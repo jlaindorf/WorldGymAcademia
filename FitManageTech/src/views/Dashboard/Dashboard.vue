@@ -1,20 +1,20 @@
 <template>
-  
   <h1>Bem Vindo, {{ nome }}</h1>
 
   <main>
 
     <v-card class="mx-auto" width="400" prepend-icon="mdi-account-multiple">
       <template v-slot:title>
-        Alunos  
-        <h1>{{ qtdAlunos }}</h1>  
+        Alunos
+        <h1>{{ qtdAlunos }}</h1>
       </template>
 
       <v-card-text>
-       
-        <v-btn type="submit" color="blue" @click="newStudent" prepend-icon="mdi-plus" variant="tonal">Adicionar Aluno</v-btn>
+
+        <v-btn type="submit" color="blue" @click="newStudent" prepend-icon="mdi-plus" variant="tonal">Adicionar
+          Aluno</v-btn>
       </v-card-text>
-      
+
     </v-card>
 
 
@@ -25,8 +25,9 @@
       </template>
 
       <v-card-text>
-       
-        <v-btn type="submit" color="blue" @click="newTrain" prepend-icon="mdi-plus" variant="tonal">Adicionar Exercício</v-btn>
+
+        <v-btn type="submit" color="blue" @click="newTrain" prepend-icon="mdi-plus" variant="tonal">Adicionar
+          Exercício</v-btn>
       </v-card-text>
     </v-card>
   </main>
@@ -43,42 +44,42 @@ export default {
     return {
       dadosUsuario: dadosUsuario,
       nome: nome,
-      qtdAlunos:'',
-      qtdExercicios:'',
+      qtdAlunos: '',
+      qtdExercicios: '',
 
     };
-    
+
   },
   mounted() {
-  axios({
-    url: 'http://localhost:3000/dashboard',
-    method: 'GET',
-  })
-  .then((response) => {
-   
-    this.qtdAlunos = response.data.amount_students;
-    this.qtdExercicios = response.data.amount_exercises;
-   
-  })
-  .catch((error) => {
-    console.error('Erro ao buscar dados do servidor:', error);
-  })
-},
-methods:{
+    axios({
+      url: 'http://localhost:3000/dashboard',
+      method: 'GET',
+    })
+      .then((response) => {
 
-  newStudent(){
+        this.qtdAlunos = response.data.amount_students;
+        this.qtdExercicios = response.data.amount_exercises;
 
-    this.$router.push('/cadastro-aluno')
+      })
+      .catch((error) => {
+        console.error('Erro ao buscar dados do servidor:', error);
+      })
   },
+  methods: {
 
-  newTrain(){
-    this.$router.push('/gerenciamento-exercicios')
+    newStudent() {
+
+      this.$router.push('/cadastro-aluno')
+    },
+
+    newTrain() {
+      this.$router.push('/gerenciamento-exercicios')
+    }
+
   }
+
 
 }
-  
-  
-  }
 </script>
 
 
@@ -88,6 +89,4 @@ main {
   flex-direction: row;
   align-content: space-between;
 }
-
-        
 </style>
