@@ -1,10 +1,10 @@
 <template>
   <v-form ref="form" @submit.prevent="handleCreateAccount">
     <v-card class="mx-auto pa-12 pb-8" elevation="8" max-width="448" rounded="lg">
-      <div class="logo">Fit Manage Tech
+      <div class="logo">WorldGym
         <span class="mdi mdi-weight-lifter"></span>
-        <h3>Cadastro de Usuário</h3>
       </div>
+      <h2>Cadastro de Usuário</h2>
       <div class="text-subtitle-1 text-medium-emphasis">Nome Completo</div>
       <v-text-field v-model="usuario.name" density="compact" placeholder="Digite seu nome Completo"
         prepend-inner-icon="mdi-note-edit-outline" variant="outlined" :class="{ 'input-error': this.errors.name }">
@@ -40,7 +40,7 @@
       <span class="message-error"> {{ this.errors.verifyPassword }} </span>
 
       <div class="text-subtitle-1 text-medium-emphasis">Selecione seu Plano</div>
-      <v-select v-model="usuario.planType" :items="['Bronze', 'Prata', 'Ouro']" variant="outlined"
+      <v-select v-model="usuario.planType" :items="items" item-title="title" item-value="value" variant="outlined"
         :class="{ 'input-error': this.errors.planType }"></v-select>
       <span class="message-error"> {{ this.errors.planType }} </span>
 
@@ -53,7 +53,7 @@
       </v-btn>
 
       <v-card-text class="text-center">
-        <a @click="cadastroConcluido" class="text-blue text-decoration-none" href="#" rel="noopener noreferrer"
+        <a @click.prevent="cadastroConcluido" class="text-blue text-decoration-none" href="#" rel="noopener noreferrer"
           target="_blank">
           <v-icon icon="mdi-chevron-left"></v-icon>Voltar à tela de Login
         </a>
@@ -71,11 +71,12 @@ export default {
   data() {
     return {
 
-      items: {
-        bronze: 'bronze',
-        silver: 'prata',
-        gold: 'ouro'
-      },
+      items: [
+        { title: 'Bronze', value: 'bronze' },
+        { title: 'Prata', value: 'silver' },
+        { title: 'Ouro', value: 'gold' },
+      ],
+
       usuario: {
         name: "",
         email: "",
@@ -89,7 +90,7 @@ export default {
   methods: {
     handleCreateAccount() {
       try {
-      
+
         const schema = Yup.object().shape({
           name: Yup.string().required('Nome é obrigatório'),
           email: Yup.string().email('Email não é valido').required('Email é obrigatório'),
@@ -103,7 +104,7 @@ export default {
             .required('A confirmação é necessária')
             .oneOf([
               Yup.ref('password')], 'As senhas devem coincidir'),
-          planType: Yup.string().required('Escolha um plano').oneOf(['Bronze', 'Prata', 'Ouro']),
+          planType: Yup.string().required('Escolha um plano').oneOf(this.items.map(item => item.value), 'Plano inválido'),
 
         })
 
@@ -153,6 +154,9 @@ export default {
           this.errors = captureErrorYup(error)
         }
       }
+    },
+    cadastroConcluido() {
+      this.$router.push('/')
     }
   }
 }

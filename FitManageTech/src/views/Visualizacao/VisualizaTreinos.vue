@@ -1,32 +1,30 @@
 <template>
   <v-form ref="form">
-    <div class="logo">Fit Manage Tech
-      <span class="mdi mdi-weight-lifter"></span>
 
 
 
-      <v-card class="mx-auto" prepend-icon="mdi mdi-account" style="width: 1215px" v-model="dias" value="segunda">
+    <v-card color="transparent" class="mx-auto" prepend-icon="mdi mdi-account" style="width: 1215px" v-model="dias"
+      value="segunda">
 
-        <div v-if="listaTreinos.length > 0">
-          {{ listaTreinos[0].student_name }}
-        </div>
+      <div v-if="listaTreinos.length > 0">
+        <h2> {{ listaTreinos[0].student_name }}</h2>
+      </div>
 
-        <v-card-text>
-          Treino do dia
-        </v-card-text>
+      <v-card-text>
+        <h1>Treino do dia</h1>
+      </v-card-text>
 
-       
-        <ul>
-          <li v-for="workout in listaTreinos" :key="workout.id">
-            <v-checkbox
-             v-model="workout.selected"
-              :label="`${workout.exercise_description} - Peso: ${workout.weight} kg - Repetições: ${workout.repetitions}`"
-              @change="addExercise(workout)"></v-checkbox>
-          </li>
-        </ul>
-      </v-card>
 
-    </div>
+      <ul>
+        <li v-for="workout in listaTreinos" :key="workout.id">
+          <v-checkbox v-model="workout.selected"
+            :label="`${workout.exercise_description} - Peso: ${workout.weight} kg - Repetições: ${workout.repetitions} - Pausa: ${workout.break_time} Segundos`"
+            @change="addExercise(workout)"></v-checkbox>
+        </li>
+      </ul>
+    </v-card>
+
+
 
 
   </v-form>
@@ -37,7 +35,6 @@
 
       <v-toolbar-title>Treinos da Semana</v-toolbar-title>
 
-      <v-spacer></v-spacer>
 
 
 
@@ -62,6 +59,7 @@
           <thead>
             <tr class="text-left">
               <th>Exercício</th>
+              <th>Peso</th>
               <th>Repetições</th>
               <th>Pausa (s)</th>
             </tr>
@@ -69,6 +67,7 @@
           <tbody>
             <tr v-for="workout in listaTreinos" :key="workout.id">
               <td>{{ workout.exercise_description }}</td>
+              <td>{{ workout.weight }}</td>
               <td>{{ workout.repetitions }}</td>
               <td>{{ workout.break_time }}</td>
             </tr>
@@ -81,6 +80,7 @@
           <thead>
             <tr class="text-left">
               <th>Exercício</th>
+              <th>Peso</th>
               <th>Repetições</th>
               <th>Pausa (s)</th>
             </tr>
@@ -88,6 +88,7 @@
           <tbody>
             <tr v-for="workout in listaTreinos" :key="workout.id">
               <td>{{ workout.exercise_description }}</td>
+              <td>{{ workout.weight }}</td>
               <td>{{ workout.repetitions }}</td>
               <td>{{ workout.break_time }}</td>
             </tr>
@@ -101,6 +102,7 @@
           <thead>
             <tr class="text-left">
               <th>Exercício</th>
+              <th>Peso</th>
               <th>Repetições</th>
               <th>Pausa (s)</th>
             </tr>
@@ -108,6 +110,7 @@
           <tbody>
             <tr v-for="workout in listaTreinos" :key="workout.id">
               <td>{{ workout.exercise_description }}</td>
+              <td>{{ workout.weight }}</td>
               <td>{{ workout.repetitions }}</td>
               <td>{{ workout.break_time }}</td>
             </tr>
@@ -119,6 +122,7 @@
           <thead>
             <tr class="text-left">
               <th>Exercício</th>
+              <th>Peso</th>
               <th>Repetições</th>
               <th>Pausa (s)</th>
             </tr>
@@ -126,6 +130,7 @@
           <tbody>
             <tr v-for="workout in listaTreinos" :key="workout.id">
               <td>{{ workout.exercise_description }}</td>
+              <td>{{ workout.weight }}</td>
               <td>{{ workout.repetitions }}</td>
               <td>{{ workout.break_time }}</td>
             </tr>
@@ -138,6 +143,7 @@
           <thead>
             <tr class="text-left">
               <th>Exercício</th>
+              <th>Peso</th>
               <th>Repetições</th>
               <th>Pausa (s)</th>
             </tr>
@@ -145,6 +151,7 @@
           <tbody>
             <tr v-for="workout in listaTreinos" :key="workout.id">
               <td>{{ workout.exercise_description }}</td>
+              <td>{{ workout.weight }}</td>
               <td>{{ workout.repetitions }}</td>
               <td>{{ workout.break_time }}</td>
             </tr>
@@ -157,6 +164,7 @@
           <thead>
             <tr class="text-left">
               <th>Exercício</th>
+              <th>Peso</th>
               <th>Repetições</th>
               <th>Pausa (s)</th>
             </tr>
@@ -164,6 +172,7 @@
           <tbody>
             <tr v-for="workout in listaTreinos" :key="workout.id">
               <td>{{ workout.exercise_description }}</td>
+              <td>{{ workout.weight }}</td>
               <td>{{ workout.repetitions }}</td>
               <td>{{ workout.break_time }}</td>
             </tr>
@@ -175,6 +184,7 @@
           <thead>
             <tr class="text-left">
               <th>Exercício</th>
+              <th>Peso</th>
               <th>Repetições</th>
               <th>Pausa (s)</th>
             </tr>
@@ -182,8 +192,10 @@
           <tbody>
             <tr v-for="workout in listaTreinos" :key="workout.id">
               <td>{{ workout.exercise_description }}</td>
+              <td>{{ workout.weight }}</td>
               <td>{{ workout.repetitions }}</td>
               <td>{{ workout.break_time }}</td>
+
             </tr>
           </tbody>
         </v-table>
@@ -201,7 +213,7 @@ export default {
     return {
       studentId: this.$route.params.id,
       listaTreinos: [],
-      dias: 'segunda'
+      dias: ''
     };
   },
   mounted() {

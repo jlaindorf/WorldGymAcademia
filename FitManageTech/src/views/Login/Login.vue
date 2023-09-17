@@ -1,14 +1,15 @@
 <template>
   
 
-    <v-form ref="form" @submit.prevent="handleSubmit">
+    <v-form  ref="form" @submit.prevent="handleSubmit">
       <v-card
         class="mx-auto pa-12 pb-8"
         elevation="8"
         max-width="448"
         rounded="lg"
+        
       >
-      <div class="logo">Fit Manage Tech
+      <div class="logo">WorldGym
         <span class="mdi mdi-weight-lifter" ></span>
       </div>
       
@@ -138,4 +139,10 @@
           width: 30%;
         }
         
+        .login-tela{
+
+          width: 100%;
+          margin: 0 auto;
+        }
+
     </style>
