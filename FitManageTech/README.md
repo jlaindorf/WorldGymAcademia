@@ -5,11 +5,12 @@
 #### A WorldGym foi criada para trazer comodidade, agilidade e controle para todas as academias do Brasil, com soluções para o controle de informações dos seus clientes.
 
 >Tecnicas Utilizadas no Projeto
-<img src="/FitManageTech/public/svg/vuedotjs-color.svg" alt="Vuejs" width="50">
+<img src="/FitManageTech/public/svg/vuedotjs-color.svg" alt="Vuejs" width="50"> VueJs
+<img src="/FitManageTech/public/svg/vuetify.svg" alt="Vuetify" width="50">Vuetify
+<img src="/FitManageTech/public/svg/css3.svg" alt="CSS" width="50"> CSS
+<img src="/FitManageTech/public/svg/axios.svg" alt="Axios" width="50"> Axios
 
-![Vuetify](/FitManageTech/public/svg/vuetify.svg)
-![CSS](/FitManageTech/public/svg/css3.svg)
-![Axios](/FitManageTech/public/svg/axios.svg)
+
 
 
 
